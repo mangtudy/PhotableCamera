@@ -10,45 +10,137 @@ import UIKit
 import AVFoundation
 import Photos
 
-class ViewController: UIViewController {
+enum LiveMode {
+    
+    case on, off, unavailable
+}
 
+class ViewController: UIViewController {
+    
     // intializing class variable
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var input: AVCaptureDeviceInput?
     var capturePhotoOutput = AVCapturePhotoOutput()
-    var cameraPosition = AVCaptureDevice.Position.back
     var imageData: Data?
+    var timer = Timer()
     // \initializing class variable
     
-    
+    // initializing option variable
+    var flashMode = AVCaptureDevice.FlashMode.off
+    var liveMode = LiveMode.on
+    var timerMode = 0
+    var cameraPosition = AVCaptureDevice.Position.back
+    // \initializing option variable
     
     // IB OUTLET
     @IBOutlet weak var previewView: UIView!
-    
+    @IBOutlet weak var timerButton: UIButton!
+    @IBOutlet weak var flashButton: UIButton!
+    @IBOutlet weak var liveButton: UIButton!
+    @IBOutlet weak var timerCountLabel: UILabel!
     // \IB OUTLET
-    
-    
-    
     
     // IB ACTION
     @IBAction func cameraAction(_ sender: UIButton) {
+        
         let photoSettings = AVCapturePhotoSettings()
         
         photoSettings.isAutoStillImageStabilizationEnabled = true
         photoSettings.isHighResolutionPhotoEnabled = true
-        photoSettings.flashMode = .auto
+        photoSettings.flashMode = flashMode
         
         if capturePhotoOutput.isLivePhotoCaptureEnabled {
-                        let livePhotoMovieFileName = NSUUID().uuidString
-                        let livePhotoMovieFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((livePhotoMovieFileName as NSString).appendingPathExtension("mov")!)
-                        photoSettings.livePhotoMovieFileURL = URL(fileURLWithPath: livePhotoMovieFilePath)
+            let livePhotoMovieFileName = NSUUID().uuidString
+            let livePhotoMovieFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((livePhotoMovieFileName as NSString).appendingPathExtension("mov")!)
+            photoSettings.livePhotoMovieFileURL = URL(fileURLWithPath: livePhotoMovieFilePath)
         }
+        
+//        for i in (0...timerMode).reversed(){
+//
+//            timerCountLabel.text = String(i)
+//            print("d")
+//            sleep(1)
+//        }
+//
+        var timerCount = timerMode
+        
+        while timerCount > 0 {
+            timerCountLabel.alpha = 1
+            timerCountLabel.text = String(timerCount)
+            print("\(timerCount)")
+            
+            
+            sleep(1)
+            timerCount -= 1
+        }
+//        timerCountLabel.text = String(timerCount)
+        timerCountLabel.alpha = 0
+        
+        
         capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
         
     }
-    // \IB ACTION
     
+    // OPTION CONTROL
+    @IBAction func camPositionAction(_ sender: UIButton) {
+        
+        if cameraPosition == AVCaptureDevice.Position.front {
+            cameraPosition = AVCaptureDevice.Position.back
+        } else {
+            cameraPosition = AVCaptureDevice.Position.front
+        }
+        
+        
+        
+        captureSession.removeInput(captureSession.inputs.first as AVCaptureInput!)
+        captureSession.removeOutput(captureSession.outputs.first as AVCaptureOutput!)
+        
+        captureSession.stopRunning()
+        loadCamera()
+    }
+    
+    
+    @IBAction func timerAction(_ sender: UIButton) {
+        
+        if timerMode == 0 {
+            timerMode = 3
+            timerButton.setTitle("Timer.three", for: UIControlState.normal)
+        } else if timerMode == 3 {
+            timerMode = 10
+            timerButton.setTitle("Timer.ten", for: UIControlState.normal)
+        } else {
+            timerMode = 0
+            timerButton.setTitle("Timer.off", for: UIControlState.normal)
+        }
+    }
+    
+    @IBAction func liveAction(_ sender: UIButton) {
+        if capturePhotoOutput.isLivePhotoCaptureEnabled == true {
+            capturePhotoOutput.isLivePhotoCaptureEnabled = false
+            liveMode = .off
+            liveButton.setTitle("Live.off", for: UIControlState.normal)
+        } else {
+            capturePhotoOutput.isLivePhotoCaptureEnabled = true
+            liveMode = .on
+            liveButton.setTitle("Live.on", for: UIControlState.normal)
+        }
+    }
+    
+    @IBAction func flashAction(_ sender: UIButton) {
+        if flashMode == .off {
+            flashMode = .auto
+            flashButton.setTitle("Flash.auto", for: UIControlState.normal)
+        } else if flashMode == .auto {
+            flashMode = .on
+            flashButton.setTitle("Flash.on", for: UIControlState.normal)
+        } else {
+            flashMode = .off
+            flashButton.setTitle("Flash.off", for: UIControlState.normal)
+        }
+    }
+    // \OPTION CONTROL
+    // \IB ACTION
     
     
     
@@ -56,8 +148,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: cameraPosition) // how to self
-
+        // load setting (user defaults)
+        liveMode = .on
+        timerMode = 0
+        cameraPosition = AVCaptureDevice.Position.back
+        flashMode = AVCaptureDevice.FlashMode.off
+        // \load setting (user defaults)
+        
+        loadCamera()
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    // basic function for camera operation
+    
+    func loadCamera(){
+        let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: AVMediaType.video, position: cameraPosition) // how to selfie camera
+        
+        
         do {
             input = try AVCaptureDeviceInput(device: captureDevice!)
             
@@ -67,12 +182,20 @@ class ViewController: UIViewController {
             
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
+            
             videoPreviewLayer?.frame = previewView.layer.bounds
             previewView.layer.addSublayer(videoPreviewLayer!)
             
             captureSession.sessionPreset = .photo
             
-            capturePhotoOutput.isLivePhotoCaptureEnabled = capturePhotoOutput.isLivePhotoCaptureSupported // option
+            if !capturePhotoOutput.isLivePhotoCaptureSupported {
+                liveMode = .unavailable
+                liveButton.alpha = 0
+            }
+            
+            if liveMode == .on {
+                capturePhotoOutput.isLivePhotoCaptureEnabled = capturePhotoOutput.isLivePhotoCaptureSupported
+            }
             capturePhotoOutput.isHighResolutionCaptureEnabled = true
             
             captureSession.startRunning()
@@ -81,17 +204,8 @@ class ViewController: UIViewController {
             
             print(error)
         }
-
-        
-        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 
 
@@ -103,13 +217,11 @@ class ViewController: UIViewController {
 
 
 
-// extension delegate
+// other functions about delegate
 
 extension ViewController : AVCapturePhotoCaptureDelegate {
     
-    
-    
-    
+    // delegate
     func photoOutput(_: AVCapturePhotoOutput, didFinishProcessingPhoto: AVCapturePhoto, error: Error?) {
         
         self.imageData = didFinishProcessingPhoto.fileDataRepresentation()
@@ -153,12 +265,13 @@ extension ViewController : AVCapturePhotoCaptureDelegate {
                     catch {
                         print("Could not remove file at url: \(outputFileURL.path)")
                     }
-                } // change to func?
+                } // change to func? if not exist?
                 
-        }
-        )
-        
+        })
     }
+    // \delegate
+    
+    
 }
 
 
