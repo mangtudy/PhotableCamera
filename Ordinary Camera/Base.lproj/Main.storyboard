@@ -17,55 +17,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-87-7CN">
-                                <rect key="frame" x="163" y="671" width="89" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-5S-Bnj">
+                                <rect key="frame" x="0.0" y="58" width="414" height="620"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="620" id="cVM-hn-owh"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-87-7CN">
+                                <rect key="frame" x="162.66666666666666" y="686" width="89" height="30"/>
                                 <state key="normal" title="Take Camera"/>
                                 <connections>
                                     <action selector="cameraAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="InN-h7-j5b"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-5S-Bnj">
-                                <rect key="frame" x="0.0" y="43" width="414" height="551"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="551" id="ldM-4c-Gyc"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOI-AI-bzn">
-                                <rect key="frame" x="336" y="671" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOI-AI-bzn">
+                                <rect key="frame" x="355" y="686" width="39" height="30"/>
                                 <state key="normal" title="Selfie"/>
                                 <connections>
                                     <action selector="camPositionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpf-T3-ouI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFj-Of-yGP">
-                                <rect key="frame" x="172" y="20" width="70" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFj-Of-yGP">
+                                <rect key="frame" x="172.66666666666666" y="20" width="69" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="69" id="Ss5-bH-PjB"/>
+                                </constraints>
                                 <state key="normal" title="Live.on"/>
                                 <connections>
                                     <action selector="liveAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VeM-ve-oIr"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-cx-utj">
-                                <rect key="frame" x="309" y="20" width="85" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-cx-utj">
+                                <rect key="frame" x="332" y="20" width="62" height="30"/>
                                 <state key="normal" title="Timer.off"/>
                                 <connections>
                                     <action selector="timerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Gg-xR-TVY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-bm-YT7">
-                                <rect key="frame" x="10" y="20" width="119" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-bm-YT7">
+                                <rect key="frame" x="20" y="20" width="119" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="gOj-4I-QJM"/>
+                                </constraints>
                                 <state key="normal" title="Flash.off"/>
                                 <connections>
                                     <action selector="flashAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5s9-Qd-MTk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2A-kx-db1">
-                                <rect key="frame" x="186" y="357" width="42" height="21"/>
+                                <rect key="frame" x="186" y="376" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -74,9 +75,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="23" id="4Ti-7M-xRy"/>
-                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ono-0u-uxi"/>
-                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="SG8-1D-1xV"/>
+                            <constraint firstItem="wyn-bm-YT7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1ma-8a-x67"/>
+                            <constraint firstItem="wyn-bm-YT7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="4nx-r1-YXl"/>
+                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7MC-te-t8p"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KOI-AI-bzn" secondAttribute="bottom" constant="20" id="H7p-3m-DY7"/>
+                            <constraint firstItem="vFj-Of-yGP" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IaN-dX-0E3"/>
+                            <constraint firstItem="vFj-Of-yGP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JJb-pm-vba"/>
+                            <constraint firstItem="xj9-87-7CN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VFX-h8-UJs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xj9-87-7CN" secondAttribute="bottom" constant="20" id="dFM-ln-abN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KOI-AI-bzn" secondAttribute="trailing" constant="20" id="fy2-kN-Hqx"/>
+                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="top" secondItem="vFj-Of-yGP" secondAttribute="bottom" constant="8" id="hFX-cp-rMI"/>
+                            <constraint firstItem="8Fn-5S-Bnj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lsC-5r-7sk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bGN-cx-utj" secondAttribute="trailing" constant="20" id="mvn-NG-JZr"/>
+                            <constraint firstItem="bGN-cx-utj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qeL-zP-Aff"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
