@@ -24,6 +24,7 @@ class ViewController: UIViewController {
     var capturePhotoOutput = AVCapturePhotoOutput()
     var imageData: Data?
     var timer = Timer()
+    var timerCount = 0
     // \initializing class variable
     
     // initializing option variable
@@ -38,49 +39,23 @@ class ViewController: UIViewController {
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var flashButton: UIButton!
     @IBOutlet weak var liveButton: UIButton!
+    @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var timerCountLabel: UILabel!
     // \IB OUTLET
     
     // IB ACTION
     @IBAction func cameraAction(_ sender: UIButton) {
         
-        let photoSettings = AVCapturePhotoSettings()
-        
-        photoSettings.isAutoStillImageStabilizationEnabled = true
-        photoSettings.isHighResolutionPhotoEnabled = true
-        photoSettings.flashMode = flashMode
-        
-        if capturePhotoOutput.isLivePhotoCaptureEnabled {
-            let livePhotoMovieFileName = NSUUID().uuidString
-            let livePhotoMovieFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((livePhotoMovieFileName as NSString).appendingPathExtension("mov")!)
-            photoSettings.livePhotoMovieFileURL = URL(fileURLWithPath: livePhotoMovieFilePath)
-        }
-        
-//        for i in (0...timerMode).reversed(){
-//
-//            timerCountLabel.text = String(i)
-//            print("d")
-//            sleep(1)
-//        }
-//
-        var timerCount = timerMode
-        
-        while timerCount > 0 {
-            timerCountLabel.alpha = 1
-            timerCountLabel.text = String(timerCount)
-            print("\(timerCount)")
-            
-            
-            sleep(1)
-            timerCount -= 1
-        }
-//        timerCountLabel.text = String(timerCount)
-        timerCountLabel.alpha = 0
+        cameraButton.isEnabled = false
+
+        timerCount = timerMode
         
         
-        capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.processTimer), userInfo: nil, repeats: true)
+ 
         
     }
+    
     
     // OPTION CONTROL
     @IBAction func camPositionAction(_ sender: UIButton) {
@@ -121,7 +96,7 @@ class ViewController: UIViewController {
             liveMode = .off
             liveButton.setTitle("Live.off", for: UIControlState.normal)
         } else {
-            capturePhotoOutput.isLivePhotoCaptureEnabled = true
+            capturePhotoOutput.isLivePhotoCaptureEnabled = capturePhotoOutput.isLivePhotoCaptureSupported
             liveMode = .on
             liveButton.setTitle("Live.on", for: UIControlState.normal)
         }
@@ -235,6 +210,8 @@ extension ViewController : AVCapturePhotoCaptureDelegate {
             }
             
         }
+        
+        cameraButton.isEnabled = true
     }
     
     
@@ -271,6 +248,35 @@ extension ViewController : AVCapturePhotoCaptureDelegate {
     }
     // \delegate
     
+    // selector
+    @objc func processTimer() {
+        
+        if timerCount > 0 {
+            self.timerCountLabel.alpha = 1
+            
+            timerCountLabel.text = String(timerCount)
+        } else {
+            let photoSettings = AVCapturePhotoSettings()
+            
+            photoSettings.isAutoStillImageStabilizationEnabled = true
+            photoSettings.isHighResolutionPhotoEnabled = true
+            photoSettings.flashMode = flashMode
+            
+            if capturePhotoOutput.isLivePhotoCaptureEnabled {
+                let livePhotoMovieFileName = NSUUID().uuidString
+                let livePhotoMovieFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((livePhotoMovieFileName as NSString).appendingPathExtension("mov")!)
+                photoSettings.livePhotoMovieFileURL = URL(fileURLWithPath: livePhotoMovieFilePath)
+            }
+            
+            capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
+            self.timerCountLabel.alpha = 0
+            timer.invalidate()
+            
+        }
+        timerCount -= 1
+    }
+    
+    // \selector
     
 }
 
