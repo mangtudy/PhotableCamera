@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
+    <device id="ipad10_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,32 +14,32 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Ordinary_Camera" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-5S-Bnj">
-                                <rect key="frame" x="0.0" y="58" width="414" height="620"/>
+                                <rect key="frame" x="0.0" y="58" width="834" height="620"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="620" id="cVM-hn-owh"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xj9-87-7CN">
-                                <rect key="frame" x="162.66666666666666" y="686" width="89" height="30"/>
+                                <rect key="frame" x="372.5" y="1062" width="89" height="30"/>
                                 <state key="normal" title="Take Camera"/>
                                 <connections>
                                     <action selector="cameraAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="InN-h7-j5b"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KOI-AI-bzn">
-                                <rect key="frame" x="355" y="686" width="39" height="30"/>
+                                <rect key="frame" x="775" y="1062" width="39" height="30"/>
                                 <state key="normal" title="Selfie"/>
                                 <connections>
                                     <action selector="camPositionAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpf-T3-ouI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFj-Of-yGP">
-                                <rect key="frame" x="172.66666666666666" y="20" width="69" height="30"/>
+                                <rect key="frame" x="382.5" y="20" width="69" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="69" id="Ss5-bH-PjB"/>
                                 </constraints>
@@ -49,14 +49,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-cx-utj">
-                                <rect key="frame" x="332" y="20" width="62" height="30"/>
+                                <rect key="frame" x="752" y="20" width="62" height="30"/>
                                 <state key="normal" title="Timer.off"/>
                                 <connections>
                                     <action selector="timerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Gg-xR-TVY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2A-kx-db1">
-                                <rect key="frame" x="171" y="335" width="71" height="65"/>
+                                <rect key="frame" x="381.5" y="523.5" width="71" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="KEA-5h-g1Q"/>
                                     <constraint firstAttribute="width" constant="71" id="sAo-Gd-Avp"/>
