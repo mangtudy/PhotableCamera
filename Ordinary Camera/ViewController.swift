@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     var imageData: Data?
     var timer = Timer()
     var timerCount = 0
+    var currentFilter = 0
     // \initializing class variable
     
     // initializing option variable
@@ -32,6 +33,8 @@ class ViewController: UIViewController {
     var liveMode = LiveMode.on
     var timerMode = 0
     var cameraPosition = AVCaptureDevice.Position.back
+    
+    var filterDictionary = [Dictionary<String, String>()]
     // \initializing option variable
     
     // IB OUTLET
@@ -41,6 +44,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var liveButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var timerCountLabel: UILabel!
+    
+    @IBOutlet weak var tuningFilterButton: UIButton!
+    @IBOutlet weak var appendButton: UIButton!
+    @IBOutlet weak var modifiedButton: UIButton!
+    
+    
+    @IBOutlet weak var filterCollectionView: UICollectionView!
+    @IBOutlet weak var tuningCollectionView: UICollectionView!
     // \IB OUTLET
     
     // IB ACTION
@@ -52,10 +63,50 @@ class ViewController: UIViewController {
         
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.processTimer), userInfo: nil, repeats: true)
- 
+    }
+    
+    @IBAction func tuningFilterAction(_ sender: UIButton) {
+        
+        tuningCollectionView.alpha = 1
+        filterCollectionView.alpha = 0
+        
+        tuningFilterButton.alpha = 0
+        appendButton.alpha = 1
+        modifiedButton.alpha = 1
         
     }
     
+    @IBAction func appendAction(_ sender: UIButton) {
+        
+        // change the filter option value
+        // \change the filter option value
+        
+        // add the filter at the end of filterCollectionView
+        filterDictionary.append(["name":"ZZ","bright":"1","forcusing":"0.5"])
+        // add the filter at the end of filterCollectionView
+        
+        tuningCollectionView.alpha = 0
+        filterCollectionView.alpha = 1
+        
+        tuningFilterButton.alpha = 1
+        appendButton.alpha = 0
+        modifiedButton.alpha = 0
+        
+        filterCollectionView.reloadData()
+    }
+    
+    @IBAction func modifiedAction(_ sender: UIButton) {
+        
+        // change the filter option value
+        // \change the filter option value
+        
+        tuningCollectionView.alpha = 0
+        filterCollectionView.alpha = 1
+        
+        tuningFilterButton.alpha = 1
+        appendButton.alpha = 0
+        modifiedButton.alpha = 0
+    }
     
     // OPTION CONTROL
     @IBAction func camPositionAction(_ sender: UIButton) {
@@ -123,17 +174,48 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // intial Condition of App
+        tuningCollectionView.alpha = 0
+        tuningFilterButton.alpha = 1
+        appendButton.alpha = 0
+        modifiedButton.alpha = 0
+        // \intial Condition of App
+        
         // load setting (user defaults)
         liveMode = .on
         timerMode = 0
         cameraPosition = AVCaptureDevice.Position.back
         flashMode = AVCaptureDevice.FlashMode.off
+        currentFilter = 4
         // \load setting (user defaults)
+        
+        // load Filter Dictionary
+        if filterDictionary.count == 1 && filterDictionary[0].count == 0 {
+            filterDictionary.remove(at: 0)
+        }
+        filterDictionary.append(["name":"AA","bright":"1","forcusing":"0.5"])
+        filterDictionary.append(["name":"BB","bright":"2","forcusing":"0.3"])
+        filterDictionary.append(["name":"CC","bright":"3","forcusing":"0.2"])
+        filterDictionary.append(["name":"DD","bright":"4","forcusing":"0.1"])
+        filterDictionary.append(["name":"EE","bright":"5","forcusing":"0.9"])
+        filterDictionary.append(["name":"FF","bright":"6","forcusing":"0.8"])
+        filterDictionary.append(["name":"GG","bright":"7","forcusing":"0.7"])
+        filterDictionary.append(["name":"HH","bright":"8","forcusing":"0.6"])
+        filterDictionary.append(["name":"II","bright":"9","forcusing":"0.5"])
+        // \load Filter Dictionary
+
         
         loadCamera()
         
         
     }
+
+    // turn on app (select Item before)
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//        collectionView(filterCollectionView, didSelectItemAt: IndexPath.init(row: currentFilter, section: 0))
+//    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -192,8 +274,7 @@ class ViewController: UIViewController {
 
 
 
-// other functions about delegate
-
+// other functions about photo capture delegate and selector
 extension ViewController : AVCapturePhotoCaptureDelegate {
     
     // delegate
@@ -277,6 +358,58 @@ extension ViewController : AVCapturePhotoCaptureDelegate {
     }
     
     // \selector
+    
+}
+
+
+// other functions about uicollection delegate and datasource
+extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == filterCollectionView {
+            
+            return filterDictionary.count
+        } else {
+            
+            return 1
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        
+        if collectionView == filterCollectionView {
+            
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath)
+            cell.backgroundColor = UIColor.green
+            return cell
+        } else {
+            // modified when more collection view is needed
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TuningCell", for: indexPath)
+            cell.backgroundColor = UIColor.blue
+            return cell
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == filterCollectionView {
+            currentFilter = indexPath.row
+        }
+        
+        print(indexPath.row)
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.red.cgColor
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 0
+    }
     
 }
 
