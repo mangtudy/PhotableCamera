@@ -106,6 +106,7 @@ class ViewController: UIViewController {
         tuningFilterButton.alpha = 1
         appendButton.alpha = 0
         modifiedButton.alpha = 0
+        
     }
     
     // OPTION CONTROL
