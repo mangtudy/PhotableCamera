@@ -45,6 +45,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var timerCountLabel: UILabel!
     
+    @IBOutlet weak var deleteFilterButton: UIButton!
     @IBOutlet weak var tuningFilterButton: UIButton!
     @IBOutlet weak var appendButton: UIButton!
     @IBOutlet weak var modifiedButton: UIButton!
@@ -65,12 +66,44 @@ class ViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.processTimer), userInfo: nil, repeats: true)
     }
     
+    
+    @IBAction func deleteFilterAction(_ sender: UIButton) {
+        
+        
+        if filterDictionary.count > 1 {
+            
+            filterDictionary.remove(at: currentFilter)
+            
+            currentFilter -= 1
+            
+            print(currentFilter)
+            
+            filterCollectionView.reloadData()
+            
+            
+            // border
+//            var cell: UICollectionViewCell?
+//            for i in 0..<filterDictionary.count {
+//
+//                cell = filterCollectionView.cellForItem(at: IndexPath.init(row: i, section: 0))
+//
+//                if i == currentFilter {
+//                    cell?.layer.borderWidth = 2.0
+//                    cell?.layer.borderColor = UIColor.red.cgColor
+//                }
+//                cell?.layer.borderWidth = 0
+//
+//            }
+        }
+    }
+    
     @IBAction func tuningFilterAction(_ sender: UIButton) {
         
         tuningCollectionView.alpha = 1
         filterCollectionView.alpha = 0
         
         tuningFilterButton.alpha = 0
+        deleteFilterButton.alpha = 0
         appendButton.alpha = 1
         modifiedButton.alpha = 1
         
@@ -89,6 +122,7 @@ class ViewController: UIViewController {
         filterCollectionView.alpha = 1
         
         tuningFilterButton.alpha = 1
+        deleteFilterButton.alpha = 1
         appendButton.alpha = 0
         modifiedButton.alpha = 0
         
@@ -104,6 +138,7 @@ class ViewController: UIViewController {
         filterCollectionView.alpha = 1
         
         tuningFilterButton.alpha = 1
+        deleteFilterButton.alpha = 1
         appendButton.alpha = 0
         modifiedButton.alpha = 0
         
@@ -178,6 +213,7 @@ class ViewController: UIViewController {
         // intial Condition of App
         tuningCollectionView.alpha = 0
         tuningFilterButton.alpha = 1
+        deleteFilterButton.alpha = 1
         appendButton.alpha = 0
         modifiedButton.alpha = 0
         // \intial Condition of App
@@ -204,15 +240,16 @@ class ViewController: UIViewController {
         filterDictionary.append(["name":"HH","bright":"8","forcusing":"0.6"])
         filterDictionary.append(["name":"II","bright":"9","forcusing":"0.5"])
         // \load Filter Dictionary
-
         
         loadCamera()
         
         
     }
-
+    
     // turn on app (select Item before)
 //    override func viewDidAppear(_ animated: Bool) {
+//
+//        super.viewDidAppear(true)
 //
 //        collectionView(filterCollectionView, didSelectItemAt: IndexPath.init(row: currentFilter, section: 0))
 //    }
@@ -378,12 +415,29 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        
         if collectionView == filterCollectionView {
             
+            /////// test code
+            if filterDictionary[indexPath.row]["bright"] == "2" {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath)
+                cell.backgroundColor = UIColor.black
+                
+                return cell
+            } else if filterDictionary[indexPath.row]["bright"] == "3" {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath)
+                cell.backgroundColor = UIColor.orange
+                
+                return cell
+                
+            } else {
+            /////// \test code
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FilterCell", for: indexPath)
             cell.backgroundColor = UIColor.green
+            
             return cell
+            /////// test code
+            }
+            /////// \test code
         } else {
             // modified when more collection view is needed
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TuningCell", for: indexPath)
@@ -401,9 +455,9 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
         
         print(indexPath.row)
         
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.layer.borderWidth = 2.0
-        cell?.layer.borderColor = UIColor.red.cgColor
+//        let cell2 = collectionView.cellForItem(at: indexPath)
+//        cell2?.layer.borderWidth = 2.0
+//        cell2?.layer.borderColor = UIColor.red.cgColor
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

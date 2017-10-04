@@ -42,6 +42,7 @@
                                     <constraint firstItem="xj9-87-7CN" firstAttribute="centerX" secondItem="qCO-19-8Gy" secondAttribute="centerX" id="7rd-Eg-d7j"/>
                                     <constraint firstItem="xj9-87-7CN" firstAttribute="centerY" secondItem="qCO-19-8Gy" secondAttribute="centerY" id="9bS-V6-aRn"/>
                                     <constraint firstAttribute="trailing" secondItem="KOI-AI-bzn" secondAttribute="trailing" constant="25" id="mAk-zt-zHf"/>
+                                    <constraint firstItem="KOI-AI-bzn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qCO-19-8Gy" secondAttribute="leading" constant="20" symbolic="YES" id="o79-c5-GeD"/>
                                     <constraint firstItem="KOI-AI-bzn" firstAttribute="centerY" secondItem="qCO-19-8Gy" secondAttribute="centerY" id="qUY-sY-SMa"/>
                                 </constraints>
                             </view>
@@ -51,18 +52,18 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="mpj-cV-gUA">
                                         <rect key="frame" x="8" y="0.0" width="320" height="70"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cmc-Kb-CV2">
-                                            <size key="itemSize" width="50" height="50"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="cmc-Kb-CV2">
+                                            <size key="itemSize" width="50" height="65"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterCell" id="bPC-no-9wt">
-                                                <rect key="frame" x="0.0" y="10" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="2.6666666666666665" width="50" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="65"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
                                             </collectionViewCell>
@@ -75,18 +76,18 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="34x-54-hd3">
                                         <rect key="frame" x="8" y="0.0" width="320" height="70"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nfh-Mf-zgP">
-                                            <size key="itemSize" width="50" height="50"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="0.0" id="Nfh-Mf-zgP">
+                                            <size key="itemSize" width="50" height="65"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TuningCell" id="PFk-vP-0LV">
-                                                <rect key="frame" x="0.0" y="10" width="50" height="50"/>
+                                                <rect key="frame" x="0.0" y="2.6666666666666665" width="50" height="65"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="65"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </view>
                                             </collectionViewCell>
@@ -106,8 +107,9 @@
                                                     <action selector="modifiedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RoC-RX-56C"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e12-kf-e4c">
-                                                <rect key="frame" x="24" y="24.333333333333371" width="22" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e12-kf-e4c">
+                                                <rect key="frame" x="4" y="2.6666666666666288" width="62" height="30"/>
+                                                <state key="normal" title="add filter"/>
                                                 <connections>
                                                     <action selector="tuningFilterAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lhn-7e-aAn"/>
                                                 </connections>
@@ -119,12 +121,21 @@
                                                     <action selector="appendAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Skq-l6-zRU"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h9s-Lx-2j0">
+                                                <rect key="frame" x="13.666666666666686" y="37.666666666666629" width="43" height="30"/>
+                                                <state key="normal" title="delete"/>
+                                                <connections>
+                                                    <action selector="deleteFilterAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pfV-0a-9WJ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="h9s-Lx-2j0" firstAttribute="centerY" secondItem="ZXt-1j-4Pe" secondAttribute="centerY" multiplier="1.5" id="2Nz-XP-8DD"/>
+                                            <constraint firstItem="h9s-Lx-2j0" firstAttribute="centerX" secondItem="ZXt-1j-4Pe" secondAttribute="centerX" id="MzR-6y-rPe"/>
                                             <constraint firstItem="e12-kf-e4c" firstAttribute="centerX" secondItem="ZXt-1j-4Pe" secondAttribute="centerX" id="QNI-eD-wrI"/>
                                             <constraint firstItem="Psg-4v-N11" firstAttribute="centerY" secondItem="ZXt-1j-4Pe" secondAttribute="centerY" multiplier="0.5" id="fqD-Qg-KJ1"/>
-                                            <constraint firstItem="e12-kf-e4c" firstAttribute="centerY" secondItem="ZXt-1j-4Pe" secondAttribute="centerY" id="ihh-Gh-Pa4"/>
+                                            <constraint firstItem="e12-kf-e4c" firstAttribute="centerY" secondItem="ZXt-1j-4Pe" secondAttribute="centerY" multiplier="0.5" id="ihh-Gh-Pa4"/>
                                             <constraint firstItem="Psg-4v-N11" firstAttribute="centerX" secondItem="ZXt-1j-4Pe" secondAttribute="centerX" id="jSx-M2-wcP"/>
                                             <constraint firstItem="aZW-7n-JsQ" firstAttribute="centerX" secondItem="ZXt-1j-4Pe" secondAttribute="centerX" id="jmj-9O-qit"/>
                                             <constraint firstAttribute="width" constant="70" id="kko-yw-ekd"/>
@@ -152,9 +163,9 @@
                                 <rect key="frame" x="0.0" y="20" width="414" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyn-bm-YT7">
-                                        <rect key="frame" x="8" y="0.0" width="119" height="30"/>
+                                        <rect key="frame" x="8" y="0.33333333333333215" width="119" height="30.000000000000004"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="119" id="3Ul-xk-LEz"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="119" id="3Ul-xk-LEz"/>
                                         </constraints>
                                         <state key="normal" title="Flash.off"/>
                                         <connections>
@@ -162,9 +173,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFj-Of-yGP">
-                                        <rect key="frame" x="172" y="0.0" width="69" height="30"/>
+                                        <rect key="frame" x="172" y="0.33333333333333215" width="69" height="30.000000000000004"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="69" id="BhK-Mk-4Iu"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="BhK-Mk-4Iu"/>
                                         </constraints>
                                         <state key="normal" title="Live.on"/>
                                         <connections>
@@ -172,9 +183,9 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-cx-utj">
-                                        <rect key="frame" x="323" y="0.0" width="83" height="30"/>
+                                        <rect key="frame" x="344" y="0.33333333333333215" width="62" height="30.000000000000004"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="83" id="czp-O1-An4"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="czp-O1-An4"/>
                                         </constraints>
                                         <state key="normal" title="Timer.off"/>
                                         <connections>
@@ -187,8 +198,10 @@
                                     <constraint firstAttribute="width" secondItem="IJj-Uf-biC" secondAttribute="height" multiplier="69:5" id="0Zb-lZ-Myh"/>
                                     <constraint firstItem="wyn-bm-YT7" firstAttribute="leading" secondItem="IJj-Uf-biC" secondAttribute="leading" constant="8" id="1zI-a7-thP"/>
                                     <constraint firstItem="bGN-cx-utj" firstAttribute="centerY" secondItem="IJj-Uf-biC" secondAttribute="centerY" id="8Cy-js-dwQ"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wyn-bm-YT7" secondAttribute="trailing" constant="20" symbolic="YES" id="9oX-uk-WM8"/>
                                     <constraint firstItem="vFj-Of-yGP" firstAttribute="centerX" secondItem="IJj-Uf-biC" secondAttribute="centerX" id="AV0-VQ-too"/>
                                     <constraint firstAttribute="trailing" secondItem="bGN-cx-utj" secondAttribute="trailing" constant="8" id="CwM-MG-XWy"/>
+                                    <constraint firstItem="bGN-cx-utj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IJj-Uf-biC" secondAttribute="leading" constant="20" symbolic="YES" id="nMM-Ri-eo1"/>
                                     <constraint firstItem="vFj-Of-yGP" firstAttribute="centerY" secondItem="IJj-Uf-biC" secondAttribute="centerY" id="rs4-8V-YxR"/>
                                     <constraint firstItem="wyn-bm-YT7" firstAttribute="centerY" secondItem="IJj-Uf-biC" secondAttribute="centerY" id="ypH-6k-Vey"/>
                                 </constraints>
@@ -204,7 +217,7 @@
                                 <rect key="frame" x="171.66666666666666" y="335.66666666666669" width="71" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="KEA-5h-g1Q"/>
-                                    <constraint firstAttribute="width" constant="71" id="sAo-Gd-Avp"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="sAo-Gd-Avp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <nil key="textColor"/>
@@ -234,6 +247,7 @@
                     <connections>
                         <outlet property="appendButton" destination="aZW-7n-JsQ" id="gHj-3M-ic9"/>
                         <outlet property="cameraButton" destination="xj9-87-7CN" id="XEz-tg-Lh0"/>
+                        <outlet property="deleteFilterButton" destination="h9s-Lx-2j0" id="Ccr-ij-lAI"/>
                         <outlet property="filterCollectionView" destination="mpj-cV-gUA" id="kQ6-SR-gGL"/>
                         <outlet property="flashButton" destination="wyn-bm-YT7" id="Qet-GO-jdd"/>
                         <outlet property="liveButton" destination="vFj-Of-yGP" id="H13-LL-klk"/>
