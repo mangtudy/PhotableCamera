@@ -74,8 +74,11 @@ class ViewController: UIViewController {
             
             filterDictionary.remove(at: currentFilter)
             
-            currentFilter -= 1
-            
+            if currentFilter > 0 {
+                
+                currentFilter -= 1
+                UserDefaults.standard.set(currentFilter, forKey: "CurrentFilter")
+            }
             print(currentFilter)
             
             filterCollectionView.reloadData()
@@ -149,8 +152,10 @@ class ViewController: UIViewController {
         
         if cameraPosition == AVCaptureDevice.Position.front {
             cameraPosition = AVCaptureDevice.Position.back
+            UserDefaults.standard.set("back", forKey: "CameraPosition")
         } else {
             cameraPosition = AVCaptureDevice.Position.front
+            UserDefaults.standard.set("front", forKey: "CameraPosition")
         }
         
         
@@ -168,12 +173,15 @@ class ViewController: UIViewController {
         if timerMode == 0 {
             timerMode = 3
             timerButton.setTitle("Timer.three", for: UIControlState.normal)
+            UserDefaults.standard.set("3", forKey: "Timer")
         } else if timerMode == 3 {
             timerMode = 10
             timerButton.setTitle("Timer.ten", for: UIControlState.normal)
+            UserDefaults.standard.set("10", forKey: "Timer")
         } else {
             timerMode = 0
             timerButton.setTitle("Timer.off", for: UIControlState.normal)
+            UserDefaults.standard.set("0", forKey: "Timer")
         }
     }
     
@@ -182,10 +190,12 @@ class ViewController: UIViewController {
             capturePhotoOutput.isLivePhotoCaptureEnabled = false
             liveMode = .off
             liveButton.setTitle("Live.off", for: UIControlState.normal)
+            UserDefaults.standard.set("off", forKey: "Live")
         } else {
             capturePhotoOutput.isLivePhotoCaptureEnabled = capturePhotoOutput.isLivePhotoCaptureSupported
             liveMode = .on
             liveButton.setTitle("Live.on", for: UIControlState.normal)
+            UserDefaults.standard.set("on", forKey: "Live")
         }
     }
     
@@ -193,12 +203,15 @@ class ViewController: UIViewController {
         if flashMode == .off {
             flashMode = .auto
             flashButton.setTitle("Flash.auto", for: UIControlState.normal)
+            UserDefaults.standard.set("auto", forKey: "Flash")
         } else if flashMode == .auto {
             flashMode = .on
             flashButton.setTitle("Flash.on", for: UIControlState.normal)
+            UserDefaults.standard.set("on", forKey: "Flash")
         } else {
             flashMode = .off
             flashButton.setTitle("Flash.off", for: UIControlState.normal)
+            UserDefaults.standard.set("off", forKey: "Flash")
         }
     }
     // \OPTION CONTROL
@@ -219,11 +232,60 @@ class ViewController: UIViewController {
         // \intial Condition of App
         
         // load setting (user defaults)
-        liveMode = .on
-        timerMode = 0
-        cameraPosition = AVCaptureDevice.Position.back
-        flashMode = AVCaptureDevice.FlashMode.off
-        currentFilter = 4
+        if let flashMode_init = UserDefaults.standard.object(forKey: "Flash") as? String {
+            
+            if flashMode_init == "off" {
+                flashButton.setTitle("Flash.off", for: UIControlState.normal)
+                flashMode = .off
+            } else if flashMode_init == "auto" {
+                flashButton.setTitle("Flash.auto", for: UIControlState.normal)
+                flashMode = .auto
+            } else {
+                flashButton.setTitle("Flash.on", for: UIControlState.normal)
+                flashMode = .on
+            }
+        }
+        
+        if let live_init = UserDefaults.standard.object(forKey: "Live") as? String {
+            
+            if live_init == "off" {
+                liveButton.setTitle("Live.off", for: UIControlState.normal)
+                liveMode = .off
+                capturePhotoOutput.isLivePhotoCaptureEnabled = false
+            } else {
+                liveButton.setTitle("Live.on", for: UIControlState.normal)
+                liveMode = .on
+                capturePhotoOutput.isLivePhotoCaptureEnabled = capturePhotoOutput.isLivePhotoCaptureSupported
+            }
+        }
+        
+        if let timer_init = UserDefaults.standard.object(forKey: "Timer") as? String {
+            
+            if timer_init == "3" {
+                timerMode = 3
+                timerButton.setTitle("Timer.three", for: UIControlState.normal)
+            } else if timer_init == "10" {
+                timerMode = 10
+                timerButton.setTitle("Timer.ten", for: UIControlState.normal)
+            } else {
+                timerMode = 0
+                timerButton.setTitle("Timer.off", for: UIControlState.normal)
+            }
+        }
+        
+        if let cameraPosition_init = UserDefaults.standard.object(forKey: "CameraPosition") as? String {
+            
+            if cameraPosition_init == "front" {
+                cameraPosition = AVCaptureDevice.Position.front
+            } else {
+                cameraPosition = AVCaptureDevice.Position.back
+            }
+        }
+        
+        if let currentFilter_init = UserDefaults.standard.object(forKey: "CurrentFilter") as? Int {
+        
+            currentFilter = currentFilter_init
+        }
         // \load setting (user defaults)
         
         // load Filter Dictionary
@@ -451,6 +513,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
         
         if collectionView == filterCollectionView {
             currentFilter = indexPath.row
+            UserDefaults.standard.set(currentFilter, forKey: "CurrentFilter")
         }
         
         print(indexPath.row)
