@@ -303,8 +303,9 @@ class ViewController: UIViewController {
         filterDictionary.append(["name":"II","bright":"9","forcusing":"0.5"])
         // \load Filter Dictionary
         
-        loadCamera()
+        collectionView(filterCollectionView, didSelectItemAt: IndexPath.init(row: currentFilter, section: 0))
         
+        loadCamera()
         
     }
     
@@ -515,6 +516,8 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
             currentFilter = indexPath.row
             UserDefaults.standard.set(currentFilter, forKey: "CurrentFilter")
         }
+        
+        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
         
         print(indexPath.row)
         
