@@ -26,6 +26,8 @@ class ViewController: UIViewController {
     var timer = Timer()
     var timerCount = 0
     var currentFilter = 0
+    var collectionViewGesture: UICollectionView!
+    var longPressGesture: UILongPressGestureRecognizer!
     // \initializing class variable
     
     // initializing option variable
@@ -104,6 +106,7 @@ class ViewController: UIViewController {
         
         tuningCollectionView.alpha = 1
         filterCollectionView.alpha = 0
+        collectionViewGesture = tuningCollectionView
         
         tuningFilterButton.alpha = 0
         deleteFilterButton.alpha = 0
@@ -123,6 +126,7 @@ class ViewController: UIViewController {
         
         tuningCollectionView.alpha = 0
         filterCollectionView.alpha = 1
+        collectionViewGesture = filterCollectionView
         
         tuningFilterButton.alpha = 1
         deleteFilterButton.alpha = 1
@@ -139,6 +143,7 @@ class ViewController: UIViewController {
         
         tuningCollectionView.alpha = 0
         filterCollectionView.alpha = 1
+        collectionViewGesture = filterCollectionView
         
         tuningFilterButton.alpha = 1
         deleteFilterButton.alpha = 1
@@ -224,6 +229,12 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         // intial Condition of App
+        collectionViewGesture = filterCollectionView
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
+        filterCollectionView.addGestureRecognizer(longPressGesture)
+        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
+        tuningCollectionView.addGestureRecognizer(longPressGesture)
+        
         tuningCollectionView.alpha = 0
         tuningFilterButton.alpha = 1
         deleteFilterButton.alpha = 1
@@ -458,6 +469,23 @@ extension ViewController : AVCapturePhotoCaptureDelegate {
         timerCount -= 1
     }
     
+    @objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
+        
+        switch(gesture.state) {
+            
+        case .began:
+            guard let selectedIndexPath = collectionViewGesture.indexPathForItem(at: gesture.location(in: collectionViewGesture)) else {
+                break
+            }
+            collectionViewGesture.beginInteractiveMovementForItem(at: selectedIndexPath)
+        case .changed:
+            collectionViewGesture.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+        case .ended:
+            collectionViewGesture.endInteractiveMovement()
+        default:
+            collectionViewGesture.cancelInteractiveMovement()
+        }
+    }
     // \selector
     
 }
@@ -471,7 +499,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
             return filterDictionary.count
         } else {
             
-            return 1
+            return 2
         }
     }
     
@@ -532,6 +560,23 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource 
         cell?.layer.borderWidth = 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        print(filterDictionary)
+        
+        let tempList = filterDictionary[sourceIndexPath.row]
+        
+        filterDictionary.remove(at: sourceIndexPath.row)
+        filterDictionary.insert(tempList, at: destinationIndexPath.row)
+        
+        print(filterDictionary)
+        
+        print("\(sourceIndexPath.item) \(destinationIndexPath.item)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
 
