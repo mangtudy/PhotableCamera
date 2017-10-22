@@ -68,7 +68,7 @@
                                     <action selector="flashAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5s9-Qd-MTk"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-5S-Bnj">
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="8Fn-5S-Bnj" customClass="UIImageView">
                                 <rect key="frame" x="0.0" y="58" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
