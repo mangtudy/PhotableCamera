@@ -189,18 +189,42 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
 
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        let ComicEffectFilter = CIFilter(name: "CIComicEffect")
-        guard let filter = ComicEffectFilter else{
+//        let ComicEffectFilter = CIFilter(name: "CIComicEffect")
+//        guard let filter = ComicEffectFilter else{
+//            return
+//        }
+//
+//        let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+//        let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!)
+//
+//        filter.setValue(cameraImage, forKey: kCIInputImageKey)
+//
+//        filteredImage = UIImage(ciImage: filter.value(forKey: kCIOutputImageKey) as! CIImage!)
+//        print(filteredImage)
+//        DispatchQueue.main.async {
+//            self.previewView.image = self.filteredImage
+//        }
+//
+        
+//        let brightnessFilter = CIFilter(name: "CIColorControls")
+        let brightnessFilter = CIFilter(name: "CIExposureAdjust") //forKey : kCIInputEVKey
+//        let brightnessFilter = CIFilter(name: "CIHighlightShadowAdjust")
+        guard let filter = brightnessFilter else{
             return
         }
         
         let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
         let cameraImage = CIImage(cvPixelBuffer: pixelBuffer!)
-        
         filter.setValue(cameraImage, forKey: kCIInputImageKey)
-        
+        filter.setValue(7, forKey: kCIInputEVKey)
+//        filter.setValue(0.01, forKey: kCIInputSaturationKey)
+//        filter.setValue(0.7, forKey: kCIInputBrightnessKey)
+//        filter.setValue(0.7, forKey: "inputBrightnes")
+//        filter.setValue(0.5, forKey: kCIInputContrastKey)
         filteredImage = UIImage(ciImage: filter.value(forKey: kCIOutputImageKey) as! CIImage!)
         print(filteredImage)
+        
+        
         DispatchQueue.main.async {
             self.previewView.image = self.filteredImage
         }
